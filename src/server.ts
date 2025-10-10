@@ -6,6 +6,7 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import { SERVER_LANG_TOKEN } from './app/services/language.service';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -39,8 +40,21 @@ app.use(
  * Handle all other requests by rendering the Angular application.
  */
 app.use((req, res, next) => {
+  const { headers } = req;
+
+  const cookies = headers.cookie ?? '';
+  const langCookie = cookies.split(';').find(
+    cookie => cookie.includes('lang')
+  ) ?? 'lang=en';
+
+  const [, lang] = langCookie.split('=');
+
   angularApp
-    .handle(req)
+    .handle(req, {
+      providers: [
+        { provide: SERVER_LANG_TOKEN, useValue: lang }
+      ]
+    })
     .then((response) =>
       response ? writeResponseToNodeResponse(response, res) : next(),
     )
