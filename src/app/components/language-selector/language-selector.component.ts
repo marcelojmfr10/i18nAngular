@@ -9,7 +9,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageSelectorComponent {
-
   languageService = inject(LanguageService);
   currentLang = this.languageService.currentLang;
 
@@ -26,5 +25,4 @@ export class LanguageSelectorComponent {
 
     this.languageService.changeLang(lang);
   }
-
 }

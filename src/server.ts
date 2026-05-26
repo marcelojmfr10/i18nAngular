@@ -43,21 +43,15 @@ app.use((req, res, next) => {
   const { headers } = req;
 
   const cookies = headers.cookie ?? '';
-  const langCookie = cookies.split(';').find(
-    cookie => cookie.includes('lang')
-  ) ?? 'lang=en';
+  const langCookie = cookies.split(';').find((cookie) => cookie.includes('lang')) ?? 'lang=en';
 
   const [, lang] = langCookie.split('=');
 
   angularApp
     .handle(req, {
-      providers: [
-        { provide: SERVER_LANG_TOKEN, useValue: lang }
-      ]
+      providers: [{ provide: SERVER_LANG_TOKEN, useValue: lang }],
     })
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
     .catch(next);
 });
 

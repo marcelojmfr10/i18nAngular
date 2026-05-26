@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { LanguageSelectorComponent } from "../../components/language-selector/language-selector.component";
+import { LanguageSelectorComponent } from '../../components/language-selector/language-selector.component';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -10,6 +10,5 @@ import { TranslatePipe } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class BasicPlanComponent {
-
   firstName = signal('Marcelo Fuentes');
- }
+}

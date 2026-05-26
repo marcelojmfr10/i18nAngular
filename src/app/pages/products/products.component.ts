@@ -10,7 +10,5 @@ import { TranslatePipe } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ProductsComponent {
-
   firstName = signal('Marcelo Fuentes');
-
 }

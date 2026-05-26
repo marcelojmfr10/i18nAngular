@@ -7,7 +7,7 @@ import { LanguageService, SERVER_LANG_TOKEN } from './services/language.service'
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('i18n-app');
@@ -17,11 +17,11 @@ export class App {
 
   constructor(
     @Optional()
-    @Inject(SERVER_LANG_TOKEN) langServer: string
+    @Inject(SERVER_LANG_TOKEN)
+    langServer: string,
   ) {
-
-    console.log({langServer});
-    console.log({cookie: this.cookie.check('lang')});
+    console.log({ langServer });
+    console.log({ cookie: this.cookie.check('lang') });
 
     const lang = langServer ?? (this.cookie.check('lang') ? this.cookie.get('lang') : 'en');
     this.languageService.changeLang(lang);
